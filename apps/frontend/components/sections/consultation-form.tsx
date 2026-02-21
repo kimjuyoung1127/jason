@@ -23,7 +23,7 @@ export default function ConsultationForm() {
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [projectType, setProjectType] = useState<string[]>([]);
-  const [budgetRange, setBudgetRange] = useState("");
+
   const [timeline, setTimeline] = useState("");
   const [referralSource, setReferralSource] = useState("");
   const [message, setMessage] = useState("");
@@ -53,7 +53,6 @@ export default function ConsultationForm() {
     email,
     company,
     projectType.length > 0 ? "filled" : "",
-    budgetRange,
     timeline,
     referralSource,
     message,
@@ -73,7 +72,6 @@ export default function ConsultationForm() {
           email,
           company,
           projectType: projectType.join(", "),
-          budgetRange,
           timeline,
           referralSource,
           message,
@@ -86,7 +84,6 @@ export default function ConsultationForm() {
       setEmail("");
       setCompany("");
       setProjectType([]);
-      setBudgetRange("");
       setTimeline("");
       setReferralSource("");
       setMessage("");
@@ -112,7 +109,7 @@ export default function ConsultationForm() {
         ) : (
           <>
             <p className={styles.completionIndicator}>
-              {filledCount}/8 입력 완료
+              {filledCount}/7 입력 완료
             </p>
 
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -165,19 +162,6 @@ export default function ConsultationForm() {
                     </button>
                   ))}
                 </div>
-                <select
-                  className={styles.select}
-                  value={budgetRange}
-                  onChange={(e) => setBudgetRange(e.target.value)}
-                >
-                  <option value="">{"예산 범위 (선택)"}</option>
-                  <option value="under-500">{"500만원 미만"}</option>
-                  <option value="500-1000">{"500만원 ~ 1,000만원"}</option>
-                  <option value="1000-3000">
-                    {"1,000만원 ~ 3,000만원"}
-                  </option>
-                  <option value="over-3000">{"3,000만원 이상"}</option>
-                </select>
                 <select
                   className={styles.select}
                   value={timeline}
