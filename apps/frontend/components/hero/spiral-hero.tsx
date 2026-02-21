@@ -1,12 +1,13 @@
 ﻿/** Hero section with WebGL spiral scene and graceful 2D fallback. */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import type { Project } from "@/lib/projects";
 import { useWebGLSupport } from "@/lib/use-webgl-support";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { DetailOverlay } from "./detail-overlay";
 import styles from "./styles/spiral-hero.module.css";
 
@@ -21,11 +22,29 @@ type SpiralHeroProps = {
 
 export function SpiralHero({ items }: SpiralHeroProps) {
   const webglSupported = useWebGLSupport();
+  const reducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [titlePhase, setTitlePhase] = useState<"visible" | "dissolving" | "hidden">("visible");
 
   const handleSelect = (index: number) => setActiveIndex(index);
   const handleClose = () => setActiveIndex(null);
   const handleChangeIndex = (nextIndex: number) => setActiveIndex(nextIndex);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setTitlePhase("hidden");
+      return;
+    }
+
+    setTitlePhase("visible");
+    const dissolveTimer = window.setTimeout(() => setTitlePhase("dissolving"), 300);
+    const hideTimer = window.setTimeout(() => setTitlePhase("hidden"), 2500);
+
+    return () => {
+      window.clearTimeout(dissolveTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, [reducedMotion]);
 
   return (
     <>
@@ -61,9 +80,16 @@ export function SpiralHero({ items }: SpiralHeroProps) {
           </div>
         )}
 
-        <div className={styles.uiLayer}>
+        <div className={styles.uiLayer} data-title-phase={titlePhase}>
           <h2
-            className={styles.heroTitle}
+            className={`${styles.heroTitle} ${
+              titlePhase === "visible"
+                ? styles.heroTitleVisible
+                : titlePhase === "dissolving"
+                  ? styles.heroTitleDissolving
+                  : styles.heroTitleHidden
+            }`}
+            data-text={"DIGITAL\nARCHITECT"}
             dangerouslySetInnerHTML={{ __html: "DIGITAL<br/>ARCHITECT" }}
           />
 
