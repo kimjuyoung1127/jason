@@ -34,7 +34,7 @@ export function SpiralScene({
   const cameraTarget = useRef(new THREE.Vector3(0, 0, 45));
   const currentLookAt = useRef(new THREE.Vector3(0, 0, 0));
   const defaultCameraPos = new THREE.Vector3(0, 0, 45);
-  const defaultLookAt = new THREE.Vector3(0, 0, 0);
+  const defaultLookAt = new THREE.Vector3(0, 3, 0);
 
   const { camera, clock } = useThree();
 
@@ -184,8 +184,15 @@ export function SpiralScene({
   return (
     <>
       {/* ?? Scene lighting ?? */}
-      <fog attach="fog" args={[0x030303, 1, 80]} />
-      <ambientLight intensity={0.4} />
+      <fog attach="fog" args={[0x050505, 5, 120]} />
+      <ambientLight intensity={0.7} />
+      <spotLight
+        position={[0, 70, 5]}
+        intensity={15}
+        angle={Math.PI / 2.5}
+        penumbra={0.7}
+        decay={1.2}
+      />
       <spotLight
         position={[20, 50, 30]}
         intensity={3}
@@ -196,8 +203,8 @@ export function SpiralScene({
       <pointLight
         position={[-15, -10, 10]}
         color="#E52A2A"
-        intensity={2}
-        distance={50}
+        intensity={2.5}
+        distance={60}
       />
 
       {/* ?? Spiral group ?? */}

@@ -18,9 +18,9 @@ export type SpiralPosition = {
 export function getSpiralPosition(index: number, total: number): SpiralPosition {
   const t = index / Math.max(total - 1, 1);
 
-  /* ── Base spiral (tornado shape) ── */
-  const baseY = -15 + t * 30;
-  const baseR = 2 + t * 18;
+  /* ── Base spiral (top-heavy funnel — more cards clustered above center) ── */
+  const baseY = -5 + t * 25;
+  const baseR = 3 + t * 15;
   const baseTheta = t * Math.PI * 6;
 
   /* ── Per-card irregularity (deterministic, seeded by index) ── */

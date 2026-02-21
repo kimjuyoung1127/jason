@@ -98,7 +98,7 @@ export default function ConsultationForm() {
 
   return (
     <section id="contact" className="section-block">
-      <div className="container-shell">
+      <div className={`container-shell ${styles.sectionInner}`}>
         <SectionHeading label="GET IN TOUCH" title="Start Your Project" />
 
         {status === "success" ? (

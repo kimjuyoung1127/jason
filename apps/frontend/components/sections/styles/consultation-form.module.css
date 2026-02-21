@@ -1,13 +1,20 @@
 /* ConsultationForm styles - Survey-style contact form with sectioned layout, toggle chips,
    completion indicator, dark input fields, accent submit button, and animated success state */
 
+/* ---- Section inner (centering) ---- */
+
+.sectionInner {
+  text-align: center;
+}
+
 /* ---- Form ---- */
 
 .form {
   display: grid;
   gap: 0.5rem;
   max-width: 620px;
-  margin-top: 2.5rem;
+  margin: 2.5rem auto 0;
+  text-align: left;
 }
 
 /* ---- Form sections ---- */
@@ -38,7 +45,8 @@
   font-size: 0.75rem;
   color: var(--muted);
   text-align: right;
-  margin-bottom: 0.5rem;
+  max-width: 620px;
+  margin: 0 auto 0.5rem;
 }
 
 /* ---- Shared input styles ---- */
@@ -164,7 +172,7 @@
   text-align: center;
   padding: 2.5rem 2rem;
   border: 1px solid var(--line);
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
   max-width: 620px;
 }
 
@@ -236,6 +244,6 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--muted);
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
   max-width: 620px;
 }

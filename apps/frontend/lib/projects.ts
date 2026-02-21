@@ -133,4 +133,40 @@ export const projects: Project[] = [
     liveUrl: "https://www.signalcraft.kr/en",
     ogImage: "/thumbnails/signalcraft.png",
   },
+  {
+    slug: "cobalt",
+    id: "11",
+    title: "COBALT",
+    client: "Fintech Platform",
+    summary: "An intuitive financial management platform for small business cash flow and operations.",
+    description:
+      "Cobalt gives small business owners real-time financial visibility with AI-powered insights, mobile-first card management, and integrated alerts. The experience prioritizes clarity and confidence so operators can make data-driven decisions without legacy tools.",
+    stack: ["Next.js", "React", "Banking API", "AI/ML"],
+    liveUrl: "https://joincobalt.com",
+    ogImage: "/thumbnails/cobalt.png",
+  },
+  {
+    slug: "perspective-funnels",
+    id: "12",
+    title: "PERSPECTIVE FUNNELS",
+    client: "Marketing SaaS",
+    summary: "A mobile-first funnel builder for high-converting lead generation without code.",
+    description:
+      "Perspective lets marketers and agencies create interactive sales funnels in under 30 minutes using pre-built templates. The platform combines conversion-optimized flows, built-in messaging automation, and real-time analytics into one cohesive tool.",
+    stack: ["React", "GSAP", "Analytics", "CRM"],
+    liveUrl: "https://www.perspective.co",
+    ogImage: "/thumbnails/funnels.png",
+  },
+  {
+    slug: "workable",
+    id: "13",
+    title: "WORKABLE",
+    client: "HR Tech",
+    summary: "An all-in-one HR platform combining recruiting, employee management, and payroll.",
+    description:
+      "Workable unifies applicant tracking, AI-powered candidate sourcing, onboarding, time tracking, and payroll into a single system. The product serves 27,000+ companies with a clean, enterprise-grade interface that balances depth with approachability.",
+    stack: ["React", "Next.js", "REST API", "Integrations"],
+    liveUrl: "https://www.workable.com",
+    ogImage: "/thumbnails/workable.png",
+  },
 ];

@@ -9,6 +9,20 @@
   background: var(--bg);
 }
 
+.wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -5%,
+    rgba(229, 42, 42, 0.07) 0%,
+    rgba(255, 255, 255, 0.025) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
 .canvas {
   position: absolute;
   inset: 0;
@@ -42,127 +56,6 @@
   color: rgba(255, 255, 255, 0.1);
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   margin: 0;
-  will-change: opacity, transform, filter;
-  transition:
-    opacity 0.4s ease,
-    filter 0.4s ease,
-    color 0.4s ease,
-    -webkit-text-stroke-color 0.4s ease;
-}
-
-.heroTitle::before,
-.heroTitle::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  white-space: pre-line;
-  line-height: inherit;
-  letter-spacing: inherit;
-  font: inherit;
-  opacity: 0;
-}
-
-.heroTitleVisible {
-  opacity: 1;
-  filter: blur(0);
-  mix-blend-mode: exclusion;
-}
-
-.heroTitleVisible::before {
-  opacity: 0.08;
-  color: rgba(255, 90, 130, 0.55);
-  transform: translate(-1px, -1px);
-}
-
-.heroTitleVisible::after {
-  opacity: 0.08;
-  color: rgba(84, 226, 255, 0.55);
-  transform: translate(1px, 1px);
-}
-
-.heroTitleDissolving {
-  animation: titleDissolve 2.2s cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
-  mix-blend-mode: normal;
-}
-
-.heroTitleDissolving::before {
-  animation: spectralGhostLeft 2.2s ease-out forwards;
-}
-
-.heroTitleDissolving::after {
-  animation: spectralGhostRight 2.2s ease-out forwards;
-}
-
-.heroTitleHidden {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-48%) scale(0.985);
-  filter: blur(6px);
-  mix-blend-mode: normal;
-  color: transparent;
-  -webkit-text-stroke: 1px transparent;
-}
-
-@keyframes titleDissolve {
-  0% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(-50%) scale(1);
-    color: rgba(255, 255, 255, 0.1);
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.3);
-    mask-image: linear-gradient(180deg, #000 100%, transparent 100%);
-  }
-  35% {
-    opacity: 0.82;
-    filter: blur(0.4px);
-    mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
-  }
-  72% {
-    opacity: 0.35;
-    filter: blur(1.8px);
-    transform: translateY(-50.5%) scale(0.996);
-    mask-image: linear-gradient(180deg, #000 38%, transparent 92%);
-  }
-  100% {
-    opacity: 0;
-    filter: blur(6px);
-    transform: translateY(-48%) scale(0.985);
-    color: transparent;
-    -webkit-text-stroke-color: transparent;
-    mask-image: linear-gradient(180deg, transparent 0%, transparent 100%);
-  }
-}
-
-@keyframes spectralGhostLeft {
-  0% {
-    opacity: 0.16;
-    transform: translate(-1px, -1px);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-16px, 6px);
-    filter: blur(3px);
-  }
-}
-
-@keyframes spectralGhostRight {
-  0% {
-    opacity: 0.16;
-    transform: translate(1px, 1px);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(16px, -6px);
-    filter: blur(3px);
-  }
-}
-
-.uiLayer[data-title-phase="dissolving"] .heroTitle,
-.uiLayer[data-title-phase="hidden"] .heroTitle {
-  mix-blend-mode: normal;
 }
 
 /* -- Scroll indicator -- */

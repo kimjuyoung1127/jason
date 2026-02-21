@@ -94,8 +94,10 @@ export function SpiralCard({
       <planeGeometry args={[6, 7.5, 1, 1]} />
       <meshStandardMaterial
         side={THREE.DoubleSide}
-        roughness={0.4}
-        metalness={0.1}
+        roughness={0.25}
+        metalness={0.15}
+        emissive="#111111"
+        emissiveIntensity={0.15}
         map={texture}
         transparent
       />
