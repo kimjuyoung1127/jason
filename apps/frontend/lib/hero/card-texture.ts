@@ -79,10 +79,13 @@ export function drawCardCanvas(project: Project, index: number): HTMLCanvasEleme
   return canvas;
 }
 
-function loadImage(src: string): Promise<HTMLImageElement> {
+function loadImage(src: string, priority = false): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
+    if (priority) {
+      (img as unknown as Record<string, string>).fetchPriority = "high";
+    }
     img.onload = () => resolve(img);
     img.onerror = reject;
     img.src = src;
@@ -137,7 +140,8 @@ function drawThumbnailCard(
 export async function createCardTexture(
   project: Project,
   index: number,
-  renderer: THREE.WebGLRenderer
+  renderer: THREE.WebGLRenderer,
+  priority = false
 ): Promise<THREE.CanvasTexture> {
   await document.fonts.ready;
 
@@ -145,7 +149,7 @@ export async function createCardTexture(
 
   if (project.ogImage) {
     try {
-      const img = await loadImage(project.ogImage);
+      const img = await loadImage(project.ogImage, priority);
       canvas = drawThumbnailCard(project, img);
     } catch {
       canvas = drawCardCanvas(project, index);

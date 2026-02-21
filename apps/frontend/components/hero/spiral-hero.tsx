@@ -38,8 +38,18 @@ export function SpiralHero({ items }: SpiralHeroProps) {
   const handleClose = () => setActiveIndex(null);
   const handleChangeIndex = (nextIndex: number) => setActiveIndex(nextIndex);
 
+  const preloadImages = items.slice(0, 3).filter((item) => item.ogImage);
+
   return (
     <>
+      {preloadImages.map((item) => (
+        <link
+          key={item.slug}
+          rel="preload"
+          as="image"
+          href={item.ogImage!}
+        />
+      ))}
       <section className={styles.wrap} aria-label="Project spiral hero">
         {webglSupported ? (
           <div className={styles.canvas}>

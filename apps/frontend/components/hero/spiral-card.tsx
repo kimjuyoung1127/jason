@@ -36,12 +36,18 @@ export function SpiralCard({
   useEffect(() => {
     let cancelled = false;
 
-    createCardTexture(project, index, gl).then((tex) => {
-      if (!cancelled) setTexture(tex);
-    });
+    const isPriority = index < 3;
+    const delay = isPriority ? 0 : (index - 2) * 100;
+
+    const timer = setTimeout(() => {
+      createCardTexture(project, index, gl, isPriority).then((tex) => {
+        if (!cancelled) setTexture(tex);
+      });
+    }, delay);
 
     return () => {
       cancelled = true;
+      clearTimeout(timer);
     };
   }, [project, index, gl]);
 

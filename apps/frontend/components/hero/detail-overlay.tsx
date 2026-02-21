@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import type { Project } from "@/lib/projects";
 import { drawCardCanvas } from "@/lib/hero/card-texture";
@@ -209,11 +210,22 @@ export function DetailOverlay({
               transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.28 }}
             >
               {thumbnailUrl && (
-                <img
-                  src={thumbnailUrl}
-                  alt={`${project.title} project card`}
-                  className={styles.thumbnail}
-                />
+                thumbnailUrl.startsWith("/") ? (
+                  <Image
+                    src={thumbnailUrl}
+                    alt={`${project.title} project card`}
+                    width={800}
+                    height={500}
+                    sizes="(max-width: 768px) 100vw, 45vw"
+                    className={styles.thumbnail}
+                  />
+                ) : (
+                  <img
+                    src={thumbnailUrl}
+                    alt={`${project.title} project card`}
+                    className={styles.thumbnail}
+                  />
+                )
               )}
 
               <div className={styles.content}>

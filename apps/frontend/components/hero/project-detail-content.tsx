@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "@/lib/projects";
 import { useInView } from "@/lib/use-in-view";
 import SectionHeading from "@/components/ui/section-heading";
@@ -39,9 +40,12 @@ export default function ProjectDetailContent({
         </Link>
         <span className={styles.projectBadge}>{project.id}</span>
         {project.ogImage ? (
-          <img
+          <Image
             src={project.ogImage}
             alt={`${project.title} project screenshot`}
+            fill
+            priority
+            sizes="100vw"
             className={styles.heroImage}
           />
         ) : null}
