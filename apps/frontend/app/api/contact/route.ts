@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+export const runtime = "nodejs";
+
 interface ContactPayload {
   name: string;
   email: string;
@@ -13,15 +15,17 @@ interface ContactPayload {
   message: string;
 }
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST ?? "smtp.gmail.com",
-  port: Number(process.env.SMTP_PORT ?? 587),
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.SMTP_USER ?? "",
-    pass: process.env.SMTP_PASS ?? "",
-  },
-});
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST ?? "smtp.gmail.com",
+    port: Number(process.env.SMTP_PORT ?? 587),
+    secure: process.env.SMTP_SECURE === "true",
+    auth: {
+      user: process.env.SMTP_USER ?? "",
+      pass: process.env.SMTP_PASS ?? "",
+    },
+  });
+}
 
 export async function POST(request: Request) {
   const body = (await request.json()) as Partial<ContactPayload>;
@@ -37,7 +41,7 @@ export async function POST(request: Request) {
 
   const to = process.env.CONTACT_TO_EMAIL;
   if (!to) {
-    console.warn("[email] CONTACT_TO_EMAIL not set — skipping email send");
+    console.error("[email] CONTACT_TO_EMAIL not set");
     return NextResponse.json(
       { success: false, message: "Email not configured" },
       { status: 500 },
@@ -71,6 +75,7 @@ export async function POST(request: Request) {
   const requestId = `lead_${Date.now()}`;
 
   try {
+    const transporter = createTransporter();
     await transporter.sendMail({
       from: `"Jason Portfolio" <${process.env.SMTP_USER}>`,
       to,
