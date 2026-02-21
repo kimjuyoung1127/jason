@@ -1,49 +1,170 @@
-/** Contact page aligned with the backend contact module. */
+/** Contact page - Split-layout form with scroll-reveal, client-side validation, and success animation. */
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useInView } from "@/lib/use-in-view";
+import styles from "./styles/contact.module.css";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type Status = "idle" | "sending" | "success" | "error";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<string>("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const payload = {
-      name: String(formData.get("name") ?? ""),
-      email: String(formData.get("email") ?? ""),
-      message: String(formData.get("message") ?? "")
-    };
+  const introView = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const formView = useInView<HTMLDivElement>({ threshold: 0.1 });
 
-    const res = await fetch("http://localhost:4000/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+  function validate(): boolean {
+    const next: Record<string, string> = {};
+    if (!name.trim()) next.name = "이름을 입력해주세요.";
+    if (!email.trim()) next.email = "이메일을 입력해주세요.";
+    else if (!EMAIL_RE.test(email))
+      next.email = "올바른 이메일 형식이 아닙니다.";
+    if (!message.trim()) next.message = "프로젝트 내용을 입력해주세요.";
+    else if (message.trim().length < 10)
+      next.message = "최소 10자 이상 입력해주세요.";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  }
 
-    if (!res.ok) {
-      setStatus("\uC694\uCCAD \uC804\uC1A1\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4. \uC785\uB825\uAC12\uC744 \uD655\uC778\uD574\uC8FC\uC138\uC694.");
-      return;
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!validate()) return;
+    setStatus("sending");
+
+    try {
+      const res = await fetch(`${API_URL}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setErrors({});
+    } catch {
+      setStatus("error");
     }
-
-    setStatus("\uBB38\uC758\uAC00 \uC811\uC218\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uBE60\uB974\uAC8C \uB2F5\uBCC0\uB4DC\uB9AC\uACA0\uC2B5\uB2C8\uB2E4.");
-    event.currentTarget.reset();
   }
 
   return (
-    <main className="detail-wrap">
-      <a href="/" className="back-link">
-        Back to index
-      </a>
-      <h1>Contact Jason</h1>
-      <p className="summary">{"\uD504\uB85C\uC81D\uD2B8 \uBAA9\uC801\uACFC \uD544\uC694\uD55C \uACB0\uACFC\uB97C \uACF5\uC720\uD574\uC8FC\uC2DC\uBA74 \uBE60\uB974\uAC8C \uC81C\uC548\uB4DC\uB9BD\uB2C8\uB2E4."}</p>
-      <form onSubmit={onSubmit} className="contact-form">
-        <input name="name" placeholder="Name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <textarea name="message" placeholder="Project brief" rows={6} required />
-        <button type="submit">Send Inquiry</button>
-      </form>
-      {status ? <p className="client">{status}</p> : null}
+    <main className={styles.page}>
+      <Link href="/" className={styles.backLink}>
+        {"← Back to Home"}
+      </Link>
+
+      <div className={styles.content}>
+        {status === "success" ? (
+          <div className={styles.successCard}>
+            <div className={styles.checkmark} />
+            <p className={styles.successTitle}>Thank You!</p>
+            <p className={styles.successText}>
+              {"문의가 접수되었습니다. 빠르게 답변드리겠습니다."}
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* ---- Left: Intro ---- */}
+            <div
+              ref={introView.ref}
+              className={`${styles.intro} ${introView.isInView ? styles.visible : ""}`}
+            >
+              <span className={styles.label}>Contact</span>
+              <h1 className={styles.heading}>
+                {"Let's Build\nSomething\nGreat."}
+              </h1>
+              <p className={styles.subtitle}>
+                {"프로젝트 목적과 필요한 결과를 공유해주시면 빠르게 제안드립니다."}
+              </p>
+
+              <div className={styles.contactInfo}>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactItemLabel}>Email</span>
+                  <a
+                    href="mailto:hello@jason.dev"
+                    className={styles.contactItemValue}
+                  >
+                    hello@jason.dev
+                  </a>
+                </div>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactItemLabel}>Based</span>
+                  <span className={styles.contactItemValue}>Seoul, KR</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ---- Right: Form ---- */}
+            <div
+              ref={formView.ref}
+              className={`${styles.formWrap} ${formView.isInView ? styles.visible : ""}`}
+            >
+              <form className={styles.form} onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder={"이름"}
+                  className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                {errors.name && (
+                  <span className={styles.fieldError}>{errors.name}</span>
+                )}
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                {errors.email && (
+                  <span className={styles.fieldError}>{errors.email}</span>
+                )}
+
+                <textarea
+                  rows={6}
+                  placeholder="Tell us about your project"
+                  className={`${styles.textarea} ${errors.message ? styles.inputError : ""}`}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+                {errors.message && (
+                  <span className={styles.fieldError}>{errors.message}</span>
+                )}
+
+                <button
+                  type="submit"
+                  className={styles.button}
+                  disabled={status === "sending"}
+                >
+                  {status === "sending" ? "Sending..." : "Send Inquiry"}
+                </button>
+
+                {status === "error" && (
+                  <p className={styles.error}>
+                    {"전송에 실패했습니다. 다시 시도해주세요."}
+                  </p>
+                )}
+              </form>
+
+              <p className={styles.trust}>
+                {"상담은 무료입니다. 부담 없이 문의하세요."}
+              </p>
+            </div>
+          </>
+        )}
+      </div>
     </main>
   );
 }

@@ -2,7 +2,6 @@
 import { SpiralHero } from "@/components/hero/spiral-hero";
 import NoiseOverlay from "@/components/ui/noise-overlay";
 import IntroLoader from "@/components/ui/intro-loader";
-import { CursorProvider } from "@/components/ui/custom-cursor";
 import Header from "@/components/layout/header";
 import AboutServices from "@/components/sections/about-services";
 import SocialProof from "@/components/sections/social-proof";
@@ -14,7 +13,7 @@ import Footer from "@/components/sections/footer";
 
 export default function HomePage() {
   return (
-    <CursorProvider>
+    <>
       <IntroLoader />
       <NoiseOverlay />
       <Header />
@@ -26,6 +25,6 @@ export default function HomePage() {
       <ConsultationForm />
       <FinalCTA />
       <Footer />
-    </CursorProvider>
+    </>
   );
 }

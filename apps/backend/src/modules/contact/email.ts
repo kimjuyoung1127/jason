@@ -16,6 +16,9 @@ export interface ContactPayload {
   email: string;
   company?: string;
   budgetRange?: string;
+  projectType?: string;
+  timeline?: string;
+  referralSource?: string;
   message: string;
 }
 
@@ -38,6 +41,9 @@ export async function sendContactEmail(data: ContactPayload): Promise<void> {
         <tr><td style="padding: 0.5rem 0; color: #999;">이메일</td><td style="padding: 0.5rem 0;">${data.email}</td></tr>
         <tr><td style="padding: 0.5rem 0; color: #999;">회사</td><td style="padding: 0.5rem 0;">${data.company || "—"}</td></tr>
         <tr><td style="padding: 0.5rem 0; color: #999;">예산</td><td style="padding: 0.5rem 0;">${budgetLabel}</td></tr>
+        <tr><td style="padding: 0.5rem 0; color: #999;">프로젝트 유형</td><td style="padding: 0.5rem 0;">${data.projectType || "—"}</td></tr>
+        <tr><td style="padding: 0.5rem 0; color: #999;">희망 일정</td><td style="padding: 0.5rem 0;">${data.timeline || "—"}</td></tr>
+        <tr><td style="padding: 0.5rem 0; color: #999;">유입 경로</td><td style="padding: 0.5rem 0;">${data.referralSource || "—"}</td></tr>
       </table>
       <div style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #222; border-radius: 8px;">
         <p style="color: #999; margin-bottom: 0.5rem;">프로젝트 내용</p>

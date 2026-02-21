@@ -1,13 +1,44 @@
-﻿/* ConsultationForm styles - Grid-layout contact form with dark input fields, rounded
-   borders, accent-outlined submit button with hover fill, and status message feedback */
+/* ConsultationForm styles - Survey-style contact form with sectioned layout, toggle chips,
+   completion indicator, dark input fields, accent submit button, and animated success state */
 
 /* ---- Form ---- */
 
 .form {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.5rem;
   max-width: 620px;
   margin-top: 2.5rem;
+}
+
+/* ---- Form sections ---- */
+
+.formSection {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.formSectionLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.formSection:first-child .formSectionLabel {
+  margin-top: 0;
+}
+
+/* ---- Completion indicator ---- */
+
+.completionIndicator {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right;
+  margin-bottom: 0.5rem;
 }
 
 /* ---- Shared input styles ---- */
@@ -21,7 +52,7 @@
   border-radius: 10px;
   padding: 0.72rem 0.8rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   outline: none;
   transition: border-color 0.3s;
 }
@@ -37,6 +68,17 @@
   color: var(--muted);
 }
 
+.inputError {
+  border-color: var(--accent);
+}
+
+.fieldError {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin: -0.25rem 0 0;
+}
+
 /* ---- Select ---- */
 
 .select {
@@ -49,6 +91,37 @@
 }
 
 .select:has(option:checked:not([value=""])) {
+  color: var(--text);
+}
+
+/* ---- Project type chips ---- */
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.chipActive {
+  border-color: var(--accent);
+  background: rgba(229, 42, 42, 0.12);
   color: var(--text);
 }
 
@@ -67,12 +140,13 @@
   color: #fff;
   padding: 0.8rem 2rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   cursor: pointer;
   border-radius: 0;
   transition: background-color 0.3s;
+  margin-top: 0.5rem;
 }
 
 .button:hover:not(:disabled) {
@@ -86,16 +160,72 @@
 
 /* ---- Status messages ---- */
 
-.success {
+.successCard {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--line);
+  margin-top: 1.5rem;
+  max-width: 620px;
+}
+
+.checkmark {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  margin: 0 auto 1.2rem;
+  position: relative;
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 8px;
+  width: 12px;
+  height: 22px;
+  border: solid var(--accent);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  animation: checkDraw 0.4s ease forwards;
+}
+
+@keyframes checkDraw {
+  from {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkmark::after {
+    animation: none;
+  }
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+}
+
+.successText {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: #4ade80;
+  font-size: 0.9rem;
+  color: var(--muted);
   margin: 0;
+  line-height: 1.6;
 }
 
 .error {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--accent);
   margin: 0;
 }
@@ -104,7 +234,7 @@
 
 .trust {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--muted);
   margin-top: 1.5rem;
   max-width: 620px;

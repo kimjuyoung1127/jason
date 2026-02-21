@@ -56,7 +56,7 @@
 
 .quote {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: #e4e4e4;
   font-style: italic;
@@ -68,14 +68,14 @@
 .name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--text);
   margin: 1.5rem 0 0;
 }
 
 .role {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--muted);
   margin: 0.25rem 0 0;
 }

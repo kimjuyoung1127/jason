@@ -32,7 +32,7 @@
 
 .subtitle {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #c7c7c7;
   margin: 1rem 0 0;
   line-height: 1.6;
@@ -54,7 +54,7 @@
   display: inline-block;
   padding: 1rem 2.5rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   text-decoration: none;

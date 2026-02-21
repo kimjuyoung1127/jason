@@ -1,0 +1,367 @@
+/* ProjectDetailContent styles - Case study page with hero banner, metadata grid, and prev/next navigation. */
+
+/* ---- Hero Banner ---- */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(6, 6, 6, 0.15) 0%, rgba(6, 6, 6, 0.4) 55%, #060606 100%);
+  pointer-events: none;
+}
+
+.backLink {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  display: inline-block;
+}
+
+.backLink::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.backLink:hover::before {
+  width: 40px;
+}
+
+.projectBadge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: rgba(255, 255, 255, 0.12);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Content Container ---- */
+
+.body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+}
+
+/* ---- Header Section ---- */
+
+.header {
+  padding: 3rem 0 0;
+}
+
+.clientLabel {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 1rem 0 0;
+}
+
+.summaryText {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #c7c7c7;
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: 1.5rem 0 0;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  margin: 3rem 0;
+}
+
+/* ---- Overview Section ---- */
+
+.overview {
+  padding-bottom: 2rem;
+}
+
+.descriptionText {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: #e4e4e4;
+  line-height: 1.8;
+  max-width: 64ch;
+  margin: 2rem 0 0;
+}
+
+/* ---- Metadata Grid ---- */
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.metaValue {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+/* ---- Tags ---- */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.tag {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  transition: border-color 0.3s ease;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+}
+
+/* ---- Action Buttons ---- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.primaryBtn {
+  display: inline-block;
+  padding: 1rem 2.2rem;
+  background: var(--text);
+  color: var(--bg);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--text);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.ghostBtn {
+  display: inline-block;
+  padding: 1rem 2.2rem;
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.ghostBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---- Prev/Next Navigation ---- */
+
+.projectNav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+  margin-top: 5rem;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 2.5rem 1.5rem;
+  transition: background 0.3s ease;
+}
+
+.navLink:hover {
+  background: var(--surface);
+}
+
+.navLinkNext {
+  text-align: right;
+  border-left: 1px solid var(--line);
+}
+
+.navDirection {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.navTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* ---- Back to Home ---- */
+
+.backHome {
+  display: block;
+  text-align: center;
+  padding: 3rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.backHome:hover {
+  color: var(--text);
+}
+
+/* ---- Scroll Reveal ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh;
+  }
+
+  .backLink {
+    top: 1.2rem;
+    left: 1.2rem;
+  }
+
+  .projectBadge {
+    top: 1.2rem;
+    right: 1.2rem;
+    font-size: 2.5rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .metaGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .projectNav {
+    grid-template-columns: 1fr;
+    margin-top: 3rem;
+  }
+
+  .navLinkNext {
+    text-align: left;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryBtn,
+  .ghostBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

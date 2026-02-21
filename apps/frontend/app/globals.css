@@ -100,7 +100,7 @@ a {
   padding: 0 1.2rem;
 }
 
-/* --- Detail page styles (used by /projects/[slug]) --- */
+/* --- Detail page styles (TODO: migrate to CSS Module when contact page is updated) --- */
 
 .detail-wrap {
   max-width: 880px;

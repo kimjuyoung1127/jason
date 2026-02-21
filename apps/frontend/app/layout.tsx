@@ -1,6 +1,7 @@
 /** Root layout defining HTML structure, font loading, and metadata. */
 import type { Metadata } from "next";
 import { Syne, JetBrains_Mono } from "next/font/google";
+import { CursorProvider } from "@/components/ui/custom-cursor";
 import "./globals.css";
 
 const syne = Syne({
@@ -36,7 +37,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={`${syne.variable} ${jetbrains.variable}`}>
-      <body>{children}</body>
+      <body>
+        <CursorProvider>{children}</CursorProvider>
+      </body>
     </html>
   );
 }

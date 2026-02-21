@@ -21,10 +21,11 @@ type SpiralHeroProps = {
 
 export function SpiralHero({ items }: SpiralHeroProps) {
   const webglSupported = useWebGLSupport();
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const handleSelect = (p: Project) => setSelectedProject(p);
-  const handleClose = () => setSelectedProject(null);
+  const handleSelect = (index: number) => setActiveIndex(index);
+  const handleClose = () => setActiveIndex(null);
+  const handleChangeIndex = (nextIndex: number) => setActiveIndex(nextIndex);
 
   return (
     <>
@@ -40,8 +41,7 @@ export function SpiralHero({ items }: SpiralHeroProps) {
               <SpiralScene
                 projects={items}
                 onSelectProject={handleSelect}
-                selectedProject={selectedProject}
-                onClose={handleClose}
+                activeIndex={activeIndex}
               />
             </Canvas>
           </div>
@@ -75,9 +75,11 @@ export function SpiralHero({ items }: SpiralHeroProps) {
       </section>
 
       <DetailOverlay
-        project={selectedProject}
-        isOpen={selectedProject !== null}
+        projects={items}
+        activeIndex={activeIndex ?? 0}
+        isOpen={activeIndex !== null}
         onClose={handleClose}
+        onChangeIndex={handleChangeIndex}
       />
     </>
   );

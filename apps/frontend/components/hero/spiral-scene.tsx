@@ -13,16 +13,14 @@ type ViewState = "gallery" | "transitioning" | "detail";
 
 type SpiralSceneProps = {
   projects: Project[];
-  onSelectProject: (p: Project) => void;
-  selectedProject: Project | null;
-  onClose: () => void;
+  onSelectProject: (index: number) => void;
+  activeIndex: number | null;
 };
 
 export function SpiralScene({
   projects,
   onSelectProject,
-  selectedProject,
-  onClose,
+  activeIndex,
 }: SpiralSceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const targetRotationY = useRef(0);
@@ -72,12 +70,9 @@ export function SpiralScene({
 
   /* ?? Handle project selection: compute camera flyto ?? */
   useEffect(() => {
-    if (selectedProject) {
-      const idx = projects.findIndex((p) => p.slug === selectedProject.slug);
-      if (idx === -1) return;
-
+    if (activeIndex !== null) {
       const total = projects.length;
-      const pos = getSpiralPosition(idx, total);
+      const pos = getSpiralPosition(activeIndex, total);
 
       const cardWorldPos = new THREE.Vector3(pos.x, pos.y, pos.z);
 
@@ -103,7 +98,7 @@ export function SpiralScene({
       cameraTarget.current.copy(defaultCameraPos);
       viewState.current = viewState.current === "gallery" ? "gallery" : "transitioning";
     }
-  }, [selectedProject, projects, camera]);
+  }, [activeIndex, projects, camera]);
 
   /* ?? Per-frame animation loop ?? */
   useFrame((_, delta) => {
@@ -145,12 +140,10 @@ export function SpiralScene({
       camera.position.lerp(cameraTarget.current, 0.04);
 
       /* Determine the look-at target */
-      const lookAtTarget = selectedProject
+      const lookAtTarget = activeIndex !== null
         ? (() => {
-            const idx = projects.findIndex((p) => p.slug === selectedProject.slug);
-            if (idx === -1) return defaultLookAt;
             const total = projects.length;
-            const sp = getSpiralPosition(idx, total);
+            const sp = getSpiralPosition(activeIndex, total);
             const cardPos = new THREE.Vector3(sp.x, sp.y, sp.z);
             if (groupRef.current) {
               cardPos.applyMatrix4(groupRef.current.matrixWorld);
@@ -166,7 +159,7 @@ export function SpiralScene({
       if (state === "transitioning") {
         const dist = camera.position.distanceTo(cameraTarget.current);
         if (dist < 0.5) {
-          viewState.current = selectedProject ? "detail" : "gallery";
+          viewState.current = activeIndex !== null ? "detail" : "gallery";
         }
       }
     }
@@ -183,9 +176,9 @@ export function SpiralScene({
   /* ?? Select handler factory ?? */
   const handleSelect = useCallback(
     (index: number) => () => {
-      onSelectProject(projects[index]);
+      onSelectProject(index);
     },
-    [onSelectProject, projects]
+    [onSelectProject]
   );
 
   return (
