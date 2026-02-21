@@ -1,0 +1,37 @@
+﻿/* CtaButton styles - Brutalist zero-radius buttons with primary solid and ghost outline variants */
+.button {
+  display: inline-block;
+  padding: 1rem 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* ---- Primary ---- */
+
+.primary {
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.primary:hover {
+  background-color: var(--accent);
+}
+
+/* ---- Ghost ---- */
+
+.ghost {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.ghost:hover {
+  border-color: var(--accent);
+}

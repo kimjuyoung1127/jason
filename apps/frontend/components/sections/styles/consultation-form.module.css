@@ -1,0 +1,111 @@
+﻿/* ConsultationForm styles - Grid-layout contact form with dark input fields, rounded
+   borders, accent-outlined submit button with hover fill, and status message feedback */
+
+/* ---- Form ---- */
+
+.form {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 620px;
+  margin-top: 2.5rem;
+}
+
+/* ---- Shared input styles ---- */
+
+.input,
+.select,
+.textarea {
+  border: 1px solid var(--line);
+  background: #0c0c0c;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.72rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--accent);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+}
+
+/* ---- Select ---- */
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a9a9a'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  padding-right: 2rem;
+  color: var(--muted);
+}
+
+.select:has(option:checked:not([value=""])) {
+  color: var(--text);
+}
+
+/* ---- Textarea ---- */
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ---- Button ---- */
+
+.button {
+  border: 1px solid rgba(229, 42, 42, 0.45);
+  background: #120606;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.3s;
+}
+
+.button:hover:not(:disabled) {
+  background-color: var(--accent);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- Status messages ---- */
+
+.success {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #4ade80;
+  margin: 0;
+}
+
+.error {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* ---- Trust signal ---- */
+
+.trust {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
+  max-width: 620px;
+}

@@ -1,0 +1,81 @@
+﻿/* Testimonials styles - Brutalist client quote cards with large accent opening quotes,
+   italic mono body text, hover lift transform, and staggered fade-in reveal */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Card ---- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card.visible:hover {
+  transform: translateY(-4px);
+}
+
+/* ---- Quote mark ---- */
+
+.quoteMark {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* ---- Quote text ---- */
+
+.quote {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #e4e4e4;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---- Attribution ---- */
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin: 1.5rem 0 0;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+}

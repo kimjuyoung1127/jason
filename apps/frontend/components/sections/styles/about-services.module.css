@@ -1,0 +1,63 @@
+﻿/* AboutServices styles - Three-column brutalist service cards with accent-numbered headers,
+   hover glow effects, and staggered scroll-reveal transitions */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Card ---- */
+
+.card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(229, 42, 42, 0.1);
+}
+
+/* ---- Card content ---- */
+
+.number {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 0.75rem;
+}
+
+.description {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #c7c7c7;
+  line-height: 1.7;
+  margin: 0;
+}

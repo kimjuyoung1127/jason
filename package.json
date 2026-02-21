@@ -1,0 +1,16 @@
+{
+  "name": "jason-portfolio-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/frontend",
+    "apps/backend"
+  ],
+  "scripts": {
+    "dev:frontend": "npm --workspace apps/frontend run dev",
+    "dev:backend": "npm --workspace apps/backend run dev",
+    "build:frontend": "npm --workspace apps/frontend run build",
+    "build:backend": "npm --workspace apps/backend run build",
+    "archive:log": "node tools/archive-log.mjs"
+  }
+}

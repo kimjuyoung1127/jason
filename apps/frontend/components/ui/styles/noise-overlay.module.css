@@ -1,0 +1,12 @@
+/* NoiseOverlay styles - Fixed full-screen grain texture with SVG feTurbulence noise */
+.overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--z-noise);
+  opacity: 0.04;
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}

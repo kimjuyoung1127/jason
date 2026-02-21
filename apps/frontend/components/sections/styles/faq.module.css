@@ -1,0 +1,75 @@
+﻿/* FAQ styles - Accordion items with bottom borders, flex question rows featuring
+   a rotating +/- indicator, and smooth max-height answer reveal transitions */
+
+.list {
+  margin-top: 3rem;
+}
+
+/* ---- Item ---- */
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---- Question ---- */
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-align: left;
+  line-height: 1.4;
+}
+
+.question:hover {
+  color: var(--accent);
+}
+
+/* ---- Indicator ---- */
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+
+.indicator.open {
+  transform: rotate(45deg);
+}
+
+/* ---- Answer ---- */
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.answer.answerOpen {
+  max-height: 300px;
+}
+
+.answerText {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #c7c7c7;
+  line-height: 1.7;
+  margin: 0;
+  padding-bottom: 1.5rem;
+}

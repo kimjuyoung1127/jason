@@ -1,0 +1,84 @@
+﻿/** Hero section with WebGL spiral scene and graceful 2D fallback. */
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { Canvas } from "@react-three/fiber";
+import type { Project } from "@/lib/projects";
+import { useWebGLSupport } from "@/lib/use-webgl-support";
+import { DetailOverlay } from "./detail-overlay";
+import styles from "./styles/spiral-hero.module.css";
+
+const SpiralScene = dynamic(
+  () => import("./spiral-scene").then((mod) => ({ default: mod.SpiralScene })),
+  { ssr: false }
+);
+
+type SpiralHeroProps = {
+  items: Project[];
+};
+
+export function SpiralHero({ items }: SpiralHeroProps) {
+  const webglSupported = useWebGLSupport();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleSelect = (p: Project) => setSelectedProject(p);
+  const handleClose = () => setSelectedProject(null);
+
+  return (
+    <>
+      <section className={styles.wrap} aria-label="Project spiral hero">
+        {webglSupported ? (
+          <div className={styles.canvas}>
+            <Canvas
+              gl={{ antialias: true, alpha: true }}
+              shadows
+              dpr={[1, 2]}
+              camera={{ position: [0, 0, 45], fov: 45 }}
+            >
+              <SpiralScene
+                projects={items}
+                onSelectProject={handleSelect}
+                selectedProject={selectedProject}
+                onClose={handleClose}
+              />
+            </Canvas>
+          </div>
+        ) : (
+          <div className={styles.fallbackGrid}>
+            {items.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/projects/${item.slug}`}
+                className={styles.fallbackCard}
+              >
+                <span className={styles.fallbackClient}>{item.client}</span>
+                <h3 className={styles.fallbackTitle}>{item.title}</h3>
+                <p className={styles.fallbackSummary}>{item.summary}</p>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        <div className={styles.uiLayer}>
+          <h2
+            className={styles.heroTitle}
+            dangerouslySetInnerHTML={{ __html: "DIGITAL<br/>ARCHITECT" }}
+          />
+
+          <div className={styles.scrollIndicator}>
+            <span>Scroll to explore</span>
+            <span className={styles.scrollLine} />
+          </div>
+        </div>
+      </section>
+
+      <DetailOverlay
+        project={selectedProject}
+        isOpen={selectedProject !== null}
+        onClose={handleClose}
+      />
+    </>
+  );
+}

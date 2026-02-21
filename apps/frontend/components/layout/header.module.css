@@ -1,0 +1,98 @@
+﻿/* Header styles - Absolute-to-fixed scroll transition with backdrop blur and mobile stacking */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-ui);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  background: transparent;
+  transition:
+    background-color 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+.fixed {
+  position: fixed;
+  background: rgba(6, 6, 6, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---- Logo ---- */
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: var(--text);
+  line-height: 1;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* ---- Nav ---- */
+
+.nav {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-decoration: none;
+  pointer-events: auto;
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: var(--accent);
+}
+
+/* ---- Mobile ---- */
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .logo {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nav {
+    display: none;
+  }
+}

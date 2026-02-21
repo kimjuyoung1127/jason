@@ -1,0 +1,159 @@
+/* Spiral hero section with 3D WebGL canvas and UI overlay layer. */
+
+.wrap {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* -- UI overlay -- */
+
+.uiLayer {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-ui);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+}
+
+.heroTitle {
+  position: absolute;
+  top: 50%;
+  left: 3rem;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  mix-blend-mode: exclusion;
+  color: rgba(255, 255, 255, 0.1);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  margin: 0;
+}
+
+/* -- Scroll indicator -- */
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  transform: rotate(-90deg);
+  transform-origin: left bottom;
+}
+
+.scrollLine {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--muted);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-100%);
+  animation: scrollLine 2s infinite ease-in-out;
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* -- Fallback 2D grid -- */
+
+.fallbackGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.fallbackCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #0a0a0a;
+  color: #fff;
+  text-decoration: none;
+  transition: border-color 200ms ease;
+}
+
+.fallbackCard:hover {
+  border-color: var(--accent);
+}
+
+.fallbackClient {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fallbackTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.fallbackSummary {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #bbb;
+}
+
+/* -- Responsive -- */
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 3rem;
+    top: 20%;
+    left: 2rem;
+    transform: none;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+
+  .uiLayer {
+    padding: 1.5rem 2rem;
+  }
+}

@@ -1,0 +1,7 @@
+# This file excludes local dependencies and build outputs.
+node_modules
+.next
+dist
+coverage
+.env
+.env.local

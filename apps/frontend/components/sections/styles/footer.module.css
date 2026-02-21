@@ -1,0 +1,81 @@
+﻿/* Footer styles - Three-column grid layout on dark background with display logo,
+   mono navigation and social links, bordered bottom copyright bar, and mobile stack */
+
+.footer {
+  background: #030303;
+  border-top: 1px solid var(--line);
+}
+
+.inner {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* ---- Grid ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+/* ---- Column ---- */
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ---- Logo + tagline ---- */
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---- Links ---- */
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+/* ---- Bottom bar ---- */
+
+.bottom {
+  border-top: 1px solid var(--line);
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+.copyright {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+}
