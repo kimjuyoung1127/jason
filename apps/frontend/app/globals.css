@@ -42,6 +42,8 @@
 
 html {
   scroll-behavior: smooth;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {
