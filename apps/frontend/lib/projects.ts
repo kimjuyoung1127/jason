@@ -22,7 +22,7 @@ export const projects: Project[] = [
       "Busy Bar is a hardware-first product that visualizes work status through a clean LED display. The website delivers product storytelling, checkout flow, and post-purchase support with a conversion-focused user journey.",
     stack: ["Next.js", "TypeScript", "Stripe", "PostHog"],
     liveUrl: "https://busy.bar",
-    ogImage: "/thumbnails/busy-bar.png",
+    ogImage: "/thumbnails/busy-bar.webp",
     color: "#E52A2A",
   },
   {
@@ -35,7 +35,7 @@ export const projects: Project[] = [
       "Headroom helps teams respond faster by automating repetitive email tasks with context-aware AI. The product experience emphasizes clarity, trust, and measurable efficiency gains for busy operators.",
     stack: ["Next.js", "React", "AI/ML", "Email API"],
     liveUrl: "https://headroom.com",
-    ogImage: "/thumbnails/headroom.png",
+    ogImage: "/thumbnails/headroom.webp",
   },
   {
     slug: "breyta-ai",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
       "Breyta transforms raw business data into clear insights without heavy manual analysis. The interface combines live dashboards with guided narratives so teams can make decisions with confidence.",
     stack: ["React", "Python", "LLM", "Data Visualization"],
     liveUrl: "https://breyta.ai",
-    ogImage: "/thumbnails/breyta-ai.png",
+    ogImage: "/thumbnails/breyta-ai.webp",
   },
   {
     slug: "content-on-demand",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
       "Content on Demand streamlines matching, production, and delivery between creators and marketing teams. The experience focuses on transparent workflow visibility, strong interaction design, and reduced delivery friction.",
     stack: ["Framer", "React", "Animation", "CMS"],
     liveUrl: "https://contentondemand.in",
-    ogImage: "/thumbnails/content-on-demand.png",
+    ogImage: "/thumbnails/content-on-demand.webp",
   },
   {
     slug: "taillog",
@@ -71,7 +71,7 @@ export const projects: Project[] = [
       "Taillog captures behavioral signals and translates them into practical routines and recommendations. The product combines data tracking, AI interpretation, and coaching-style guidance in one unified flow.",
     stack: ["Next.js", "TypeScript", "AI/ML", "Data Analytics"],
     liveUrl: "https://www.mungai.co.kr",
-    ogImage: "/thumbnails/taillog.png",
+    ogImage: "/thumbnails/taillog.webp",
   },
   {
     slug: "puppyvill",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
       "Puppyvill consolidates multiple pet care services into one clear digital experience. The site is designed to improve trust, simplify reservations, and communicate service quality at first glance.",
     stack: ["Next.js", "React", "Responsive Design", "SEO"],
     liveUrl: "https://www.puppyvill.com",
-    ogImage: "/thumbnails/puppyvill.png",
+    ogImage: "/thumbnails/puppyvill.webp",
   },
   {
     slug: "vibehub",
@@ -95,7 +95,7 @@ export const projects: Project[] = [
       "Vibe Hub supports collaboration through project sharing, technical feedback, and practical AI playbooks. The platform balances creator expression with information architecture for sustained community engagement.",
     stack: ["Next.js", "TypeScript", "Community", "AI"],
     liveUrl: "https://www.vibehub.tech",
-    ogImage: "/thumbnails/vibehub.png",
+    ogImage: "/thumbnails/vibehub.webp",
   },
   {
     slug: "tak-dijang",
@@ -107,7 +107,7 @@ export const projects: Project[] = [
       "Tak Dijang showcases end-to-end e-commerce design services from planning to visual execution. The portfolio structure highlights measurable conversion impact and clean storytelling for client acquisition.",
     stack: ["Next.js", "Vercel", "Responsive Design", "Photography"],
     liveUrl: "https://tak-iota.vercel.app",
-    ogImage: "/thumbnails/tak-dijang.png",
+    ogImage: "/thumbnails/tak-dijang.webp",
   },
   {
     slug: "signalcraft-app",
@@ -119,7 +119,7 @@ export const projects: Project[] = [
       "Signalcraft Biz visualizes machine and facility data streams in a single operational interface. It combines live charts, anomaly tracking, and workflow-ready alerts to support fast decision making.",
     stack: ["React", "TypeScript", "WebSocket", "D3.js"],
     liveUrl: "https://signalcraft-web-app-zbpf.vercel.app/dashboard",
-    ogImage: "/thumbnails/signalcraft-app.png",
+    ogImage: "/thumbnails/signalcraft-app.webp",
   },
   {
     slug: "signalcraft",
@@ -131,7 +131,7 @@ export const projects: Project[] = [
       "Signalcraft detects risk patterns from vibration and acoustic data before failures occur. The product combines edge AI, reliability dashboards, and field-ready workflows for production-grade deployment.",
     stack: ["Next.js", "TypeScript", "Edge AI", "IoT"],
     liveUrl: "https://www.signalcraft.kr/en",
-    ogImage: "/thumbnails/signalcraft.png",
+    ogImage: "/thumbnails/signalcraft.webp",
   },
   {
     slug: "cobalt",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
       "Cobalt gives small business owners real-time financial visibility with AI-powered insights, mobile-first card management, and integrated alerts. The experience prioritizes clarity and confidence so operators can make data-driven decisions without legacy tools.",
     stack: ["Next.js", "React", "Banking API", "AI/ML"],
     liveUrl: "https://joincobalt.com",
-    ogImage: "/thumbnails/cobalt.png",
+    ogImage: "/thumbnails/cobalt.webp",
   },
   {
     slug: "perspective-funnels",
@@ -155,7 +155,7 @@ export const projects: Project[] = [
       "Perspective lets marketers and agencies create interactive sales funnels in under 30 minutes using pre-built templates. The platform combines conversion-optimized flows, built-in messaging automation, and real-time analytics into one cohesive tool.",
     stack: ["React", "GSAP", "Analytics", "CRM"],
     liveUrl: "https://www.perspective.co",
-    ogImage: "/thumbnails/funnels.png",
+    ogImage: "/thumbnails/funnels.webp",
   },
   {
     slug: "workable",
@@ -167,6 +167,6 @@ export const projects: Project[] = [
       "Workable unifies applicant tracking, AI-powered candidate sourcing, onboarding, time tracking, and payroll into a single system. The product serves 27,000+ companies with a clean, enterprise-grade interface that balances depth with approachability.",
     stack: ["React", "Next.js", "REST API", "Integrations"],
     liveUrl: "https://www.workable.com",
-    ogImage: "/thumbnails/workable.png",
+    ogImage: "/thumbnails/workable.webp",
   },
 ];
