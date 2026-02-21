@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useInView } from "@/lib/use-in-view";
 import styles from "./styles/contact.module.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -40,7 +40,7 @@ export default function ContactPage() {
     setStatus("sending");
 
     try {
-      const res = await fetch(`${API_URL}/contact`, {
+      const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),

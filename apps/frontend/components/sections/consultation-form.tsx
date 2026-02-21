@@ -6,7 +6,7 @@ import { useState, type FormEvent } from "react";
 import SectionHeading from "@/components/ui/section-heading";
 import styles from "./styles/consultation-form.module.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -65,7 +65,7 @@ export default function ConsultationForm() {
     setStatus("sending");
 
     try {
-      const res = await fetch(`${API_URL}/contact`, {
+      const res = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
