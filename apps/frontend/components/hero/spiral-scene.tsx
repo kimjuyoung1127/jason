@@ -59,12 +59,31 @@ export function SpiralScene({
       targetRotationY.current += e.deltaY * 0.005;
     };
 
+    /* Touch support for mobile */
+    let lastTouchX = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (viewState.current !== "gallery" || e.touches.length !== 1) return;
+      lastTouchX = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (viewState.current !== "gallery" || e.touches.length !== 1) return;
+      const deltaX = e.touches[0].clientX - lastTouchX;
+      lastTouchX = e.touches[0].clientX;
+      targetRotationY.current += deltaX * 0.003;
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, []);
 

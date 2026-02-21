@@ -1,7 +1,7 @@
 ﻿/** Hero section with WebGL spiral scene and graceful 2D fallback. */
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
@@ -9,6 +9,16 @@ import type { Project } from "@/lib/projects";
 import { useWebGLSupport } from "@/lib/use-webgl-support";
 import { DetailOverlay } from "./detail-overlay";
 import styles from "./styles/spiral-hero.module.css";
+
+function useMobileDpr(): [number, number] {
+  const [dpr, setDpr] = useState<[number, number]>([1, 2]);
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setDpr([1, 1.5]);
+    }
+  }, []);
+  return dpr;
+}
 
 const SpiralScene = dynamic(
   () => import("./spiral-scene").then((mod) => ({ default: mod.SpiralScene })),
@@ -21,6 +31,7 @@ type SpiralHeroProps = {
 
 export function SpiralHero({ items }: SpiralHeroProps) {
   const webglSupported = useWebGLSupport();
+  const dpr = useMobileDpr();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleSelect = (index: number) => setActiveIndex(index);
@@ -35,7 +46,7 @@ export function SpiralHero({ items }: SpiralHeroProps) {
             <Canvas
               gl={{ antialias: true, alpha: true }}
               shadows
-              dpr={[1, 2]}
+              dpr={dpr}
               camera={{ position: [0, 0, 45], fov: 45 }}
             >
               <SpiralScene
