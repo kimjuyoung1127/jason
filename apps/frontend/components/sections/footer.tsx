@@ -9,9 +9,9 @@ const navLinks = [
 ] as const;
 
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Email", href: "mailto:hello@jason.dev" },
+  { label: "GitHub", href: "https://github.com/kimjuyoung1127" },
+  { label: "Instagram", href: "https://www.instagram.com/mungmungfit/" },
+  { label: "Email", href: "mailto:gmdqn2tp@gmail.com" },
 ] as const;
 
 export default function Footer() {

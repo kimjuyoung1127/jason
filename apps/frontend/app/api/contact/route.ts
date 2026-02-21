@@ -87,7 +87,8 @@ export async function POST(request: Request) {
     console.log(`[contact] Lead ${requestId} — email sent to ${to}`);
     return NextResponse.json({ success: true, requestId }, { status: 201 });
   } catch (err) {
-    console.error(`[contact] Lead ${requestId} — email failed:`, err);
+    const errMsg = err instanceof Error ? err.message : String(err);
+    console.error(`[contact] Lead ${requestId} — email failed:`, errMsg);
     return NextResponse.json(
       { success: false, message: "Email delivery failed" },
       { status: 500 },
