@@ -83,10 +83,10 @@ export function SpiralHero({ items }: SpiralHeroProps) {
         )}
 
         <div className={styles.uiLayer}>
-          <h2
-            className={styles.heroTitle}
-            dangerouslySetInnerHTML={{ __html: "DIGITAL<br/>ARCHITECT" }}
-          />
+          <h2 className={styles.heroTitle}>
+            <span className={styles.heroTitleLine}>DIGITAL</span>
+            <span className={styles.heroTitleLine}>ARCHITECT</span>
+          </h2>
 
           <div className={styles.scrollIndicator}>
             <span>Scroll to explore</span>

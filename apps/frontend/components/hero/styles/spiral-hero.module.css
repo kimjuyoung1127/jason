@@ -56,6 +56,13 @@
   color: rgba(255, 255, 255, 0.1);
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   margin: 0;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.heroTitleLine {
+  display: block;
+  white-space: nowrap;
 }
 
 /* -- Scroll indicator -- */
@@ -157,7 +164,7 @@
 
 @media (max-width: 768px) {
   .heroTitle {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
     top: 20%;
     left: 2rem;
     right: 2rem;
